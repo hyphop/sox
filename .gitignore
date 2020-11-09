@@ -30,3 +30,5 @@ CMakeFiles
 cmake_install.cmake
 *.a
 tags
+
+*.org
