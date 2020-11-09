@@ -33,6 +33,7 @@
   EFFECT(dither)
   EFFECT(divide)
   EFFECT(dop)
+  EFFECT(dsd)
   EFFECT(downsample)
   EFFECT(earwax)
   EFFECT(echo)

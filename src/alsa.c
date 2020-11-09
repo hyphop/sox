@@ -42,6 +42,7 @@ static const
     { 24, SND_PCM_FORMAT_S24_3LE, 3, SOX_ENCODING_SIGN2 },
     { 32, SND_PCM_FORMAT_S32, 4, SOX_ENCODING_SIGN2 },
     { 32, SND_PCM_FORMAT_U32, 4, SOX_ENCODING_UNSIGNED },
+    { 32, SND_PCM_FORMAT_DSD_U32_BE, 4, SOX_ENCODING_DSD },
     {  0, 0, 0, SOX_ENCODING_UNKNOWN } /* end of list */
   };
 
@@ -325,6 +326,12 @@ static size_t write_(sox_format_t * ft, sox_sample_t const * buf, size_t len)
         while (i--) *buf1++ = SOX_SAMPLE_TO_UNSIGNED_32BIT(*buf++, ft->clips);
         break;
       }
+      case SND_PCM_FORMAT_DSD_U32_BE: {
+        uint32_t * buf1 = (uint32_t *)p->buf;
+        while (i--) *buf1++ = (uint32_t )*buf++;
+        break;
+      }
+
       default: lsx_fail_errno(ft, SOX_EFMT, "invalid format");
         return 0;
     }

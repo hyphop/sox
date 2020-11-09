@@ -2251,7 +2251,7 @@ static lsx_enum_item const plot_methods[] = {
 enum {
   encoding_signed_integer, encoding_unsigned_integer, encoding_floating_point,
   encoding_ms_adpcm, encoding_ima_adpcm, encoding_oki_adpcm,
-  encoding_gsm_full_rate, encoding_u_law, encoding_a_law};
+  encoding_gsm_full_rate, encoding_u_law, encoding_a_law, encoding_dsd };
 
 static lsx_enum_item const encodings[] = {
   {"signed-integer", encoding_signed_integer},
@@ -2264,6 +2264,7 @@ static lsx_enum_item const encodings[] = {
   {"u-law", encoding_u_law},
   {"mu-law", encoding_u_law},
   {"a-law", encoding_a_law},
+  {"dsd", encoding_dsd},
   {0, 0}};
 
 static int enum_option(char const * arg, int option_index, lsx_enum_item const * items)
@@ -2462,6 +2463,7 @@ static char parse_gopts_and_fopts(file_t * f)
       break;
 
     case 'e': switch (enum_option(optstate.arg, opt_index('e'), encodings)) {
+      case encoding_dsd: f->encoding.encoding = SOX_ENCODING_DSD; break ;
       case encoding_signed_integer:   f->encoding.encoding = SOX_ENCODING_SIGN2;     break;
       case encoding_unsigned_integer: f->encoding.encoding = SOX_ENCODING_UNSIGNED;  break;
       case encoding_floating_point:   f->encoding.encoding = SOX_ENCODING_FLOAT;     break;
