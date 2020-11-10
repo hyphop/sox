@@ -1,0 +1,9 @@
+DSD Sox build
+-------------
+
+    git clone https://github.com/hyphop/sox
+    cd sox
+    autoreconf -i
+    ./configure
+    make
+
