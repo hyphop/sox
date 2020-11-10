@@ -33,6 +33,7 @@ static const
     sox_encoding_t enc;
   } formats[] = {
     /* order by # of bits; within that, preferred first */
+
     {  8, SND_PCM_FORMAT_S8, 1, SOX_ENCODING_SIGN2 },
     {  8, SND_PCM_FORMAT_U8, 1, SOX_ENCODING_UNSIGNED },
     { 16, SND_PCM_FORMAT_S16, 2, SOX_ENCODING_SIGN2 },
@@ -42,6 +43,7 @@ static const
     { 24, SND_PCM_FORMAT_S24_3LE, 3, SOX_ENCODING_SIGN2 },
     { 32, SND_PCM_FORMAT_S32, 4, SOX_ENCODING_SIGN2 },
     { 32, SND_PCM_FORMAT_U32, 4, SOX_ENCODING_UNSIGNED },
+
     { 32, SND_PCM_FORMAT_DSD_U32_BE, 4, SOX_ENCODING_DSD },
     {  0, 0, 0, SOX_ENCODING_UNKNOWN } /* end of list */
   };
@@ -88,8 +90,10 @@ static int select_format(
   }
 
   if (*nbits_ != formats[cand].bits || *encoding_ != formats[cand].enc) {
+    if ( *encoding_ != SOX_ENCODING_DSD ) {
     lsx_warn("can't encode %u-bit %s", *nbits_,
         sox_encodings_info[*encoding_].desc);
+    }
     *nbits_ = formats[cand].bits;
     *encoding_ = formats[cand].enc;
   }

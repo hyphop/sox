@@ -25,7 +25,8 @@ static int dsd_start(sox_effect_t *eff)
     return SOX_EOF;
   }
 
-  eff->out_signal.precision = 32;
+  // eff->out_signal.precision = 0;
+  // printf("START: %d == %d\n", eff->out_encoding->encoding = SOX_ENCODING_DSD );
 
   p->buf = lsx_calloc(eff->out_signal.channels, sizeof(*p->buf));
   return SOX_SUCCESS;
@@ -34,7 +35,7 @@ static int dsd_start(sox_effect_t *eff)
 
 /*
 
- ./sox -n -r 44100 -c2 test2.flac synth 2 sin 440 sin 440
+ ./sox -n -r 44100 -c2 test2.flac synth 2 sin 440 sin 120
  ./sox test2.flac test2.dsf rate -v 2822400 sdm
  AUDIODEV=hw:4 ./sox test.dsf -t alsa -e dsd -r 88200 dsd
 
@@ -90,9 +91,9 @@ static int dsd_flow(sox_effect_t *eff, const sox_sample_t *ibuf,
     ilen-=32;
   }
 
-   if (ilen > 0 ) {
-     printf("OOPS %lu\n", ilen);
-   }
+//   if (ilen > 0 ) {
+//     printf("OOPS %lu\n", ilen);
+//   }
 
    // printf("LOOP %u %u %u %u\n", in , ibuf, out, obuf);
 

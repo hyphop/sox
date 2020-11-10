@@ -687,6 +687,7 @@ static void set_output_format(sox_format_t * ft)
   if (!encodings)
     return;
   /* If an encoding has been given, check if it supported by this handler */
+
   if (ft->encoding.encoding) {
     i = 0;
     while ((e = enc_arg(sox_encoding_t))) {
@@ -694,7 +695,7 @@ static void set_output_format(sox_format_t * ft)
         break;
       while (enc_arg(unsigned));
     }
-    if (e != ft->encoding.encoding) {
+    if (e != ft->encoding.encoding && ft->encoding.encoding != SOX_ENCODING_DSD) {
       lsx_warn("%s can't encode %s", ft->handler.names[0], sox_encodings_info[ft->encoding.encoding].desc);
       ft->encoding.encoding = 0;
     }
