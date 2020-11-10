@@ -1,7 +1,7 @@
 DSD sox usage
 -------------
 
-tags: DSD DSF PCM DOP ALSA
+tags: DSD DSF PCM DOP ALSA Native-DSD
 
 ## Alsa PCM output
 
@@ -71,7 +71,7 @@ Output stereo sin 440 left and sin 120 right
 AUDIODEV=hw:1 ./sox -c2 -n -t alsa -e dsd -r 88200 synth 2 sin 440 sin 120 rate -v 2822400 sdm dsd repeat 100
 ```
 
-## pcm analog example
+## PCM analog example
 
 ```
 AUDIODEV=hw:1 ./sox -c2 -n -t alsa -r 44100 synth 2 sin 440 sin 120 repeat 100
